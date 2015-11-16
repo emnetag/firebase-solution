@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ChirperApp">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Firebase Demo</title>
+
+	<link rel="stylesheet" href="css/main.css"> <!-- includes bootstrap -->
+
+	<!-- load angular -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
+</head>
+<body ng-controller="ChirperCtrl">
+
+<!-- Header with logout button -->
+<header class="container-fluid">
+	<div class="logout" ng-if="userId">
+		<span>{{users[userId].handle}}</span>
+		<button ng-click="logOut()" class="btn btn-warning">Logout</button>
+	</div>
+	<div class="logo">
+		<i class="fa fa-twitter fa-3x"></i>
+	</div>
+</header>	
+
+<main class="container">
+	
+	<!-- Sign in form -->
+	<div></div>
+
+
+	<!-- Tweet form -->
+	<div class="tweet-box write-tweet">
+		<div>
+			<!-- Show image of current user -->
+			<img class="image" ng-src="{{users[userId].avatar}}"></img>
+
+			<!-- Form for writing tweets -->
+			<form name="tweetForm" id="tweet-input">
+
+				<textarea placeholder="What's Happening..." name="text" class="form-control" ng-model="newChirp" required ng-maxlength="140"></textarea>
+				<p class="help-block" ng-show="tweetForm.text.$error.maxlength">140 character limit!</p>
+				
+				<div class="form-group send-tweet">
+					<button type="submit" class="btn btn-primary" ng-click="chirp()" ng-disabled="tweetForm.$invalid">
+						<i class="fa fa-pencil-square-o"></i> Share
+					</button>
+				</div>
+			</form>
+		</div>
+	</div> <!-- end tweet form -->
+
+
+	<!-- Show everyone's tweets! -->
+	<div>
+		<!-- Use ng-repeat directive to repeat a div for each element in chirps -->
+		<!-- order by time (in reverse chronological order) -->
+		<div class="tweet-box">
+			<div>
+				<!-- This is an img tag that shows the userImage of that chirp. -->
+				<!-- Note we access the avatar from the users object -->
+				<img class="image" ng-src="{{users[chirp.userId].avatar}}"></img>
+				
+				<!-- Use an expressions to show the handle and time of tweet -->
+				<!-- format the time as a 'medium' -->
+				<span class="handle"></span>
+				<span class="time"></span>
+			</div>
+
+			<!-- Use an expression to show the text of the tweet -->
+			<div class="tweet"></div>
+
+			<div class="likes">					
+				<!-- Add a directive so that when the heart is clicked, it calls a function -->
+				<!-- You should pass in which chirp to like when you call the function -->
+				<i ng-click="like(tweet)" class="fa fa-heart"></i>
+				
+				<!-- Use an expression to show the number of likes -->
+				<span></span>
+			</div>
+		</div>
+	</div> <!-- end shown results -->
+
+</main>
+
+
+<!-- load external libraries -->
+<script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
+
+<!-- load our script -->
+<script src="js/app.js"></script>
+
+</body>
+</html>
