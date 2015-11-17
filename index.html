@@ -64,16 +64,14 @@
 				
 				<!-- Use an expressions to show the handle and time of tweet -->
 				<!-- format the time as a 'medium' -->
-				<span class="handle"></span>
+				<span class="handle"><!-- do this after auth --></span>
 				<span class="time"></span>
 			</div>
 
 			<!-- Use an expression to show the text of the tweet -->
 			<div class="tweet"></div>
 
-			<div class="likes">					
-				<!-- Add a directive so that when the heart is clicked, it calls a function -->
-				<!-- You should pass in which chirp to like when you call the function -->
+			<div class="likes">
 				<i ng-click="like(tweet)" class="fa fa-heart"></i>
 				
 				<!-- Use an expression to show the number of likes -->
