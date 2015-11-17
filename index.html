@@ -27,7 +27,7 @@
 <main class="container">
 	
 	<!-- Sign in form -->
-	<div></div>
+	<div ng-include="'partials/signup-form.html'"></div>
 
 
 	<!-- Tweet form -->
@@ -56,7 +56,7 @@
 	<div>
 		<!-- Use ng-repeat directive to repeat a div for each element in chirps -->
 		<!-- order by time (in reverse chronological order) -->
-		<div class="tweet-box">
+		<div ng-repeat="chirp in chirps | orderBy: -time" class="tweet-box">
 			<div>
 				<!-- This is an img tag that shows the userImage of that chirp. -->
 				<!-- Note we access the avatar from the users object -->
@@ -69,7 +69,7 @@
 			</div>
 
 			<!-- Use an expression to show the text of the tweet -->
-			<div class="tweet"></div>
+			<div class="tweet">{{chirp.text}}</div>
 
 			<div class="likes">
 				<i ng-click="like(tweet)" class="fa fa-heart"></i>
